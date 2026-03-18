@@ -9,7 +9,7 @@
 **Definition:** A sequence of characters wrapped in `''`, `""`, `''''''`, or `""""""`.
 
 ```python
-name = 'nick'           # same as str('nick')
+name = 'lin'           # same as str('lin')
 s1 = str(1.1)           # "1.1"
 s2 = str([1, 2, 3])     # "[1, 2, 3]"
 ```
@@ -29,11 +29,11 @@ s2 = str([1, 2, 3])     # "[1, 2, 3]"
 ### 1. Index Access (read-only)
 
 ```python
-msg = 'hello nick'
-#      0123456789
+msg = 'hello lin'
+#      012345678
 
-msg[6]   # 'n'
-msg[-3]  # 'i'   (negative index counts from the right)
+msg[6]   # 'l'
+msg[-3]  # 'l'   (negative index counts from the right)
 ```
 
 > Strings are **immutable** — you can read by index but cannot change a character in place.
@@ -45,13 +45,13 @@ msg[-3]  # 'i'   (negative index counts from the right)
 > Rule: **includes start, excludes end**
 
 ```python
-msg = 'hello nick'
+msg = 'hello lin'
 
-msg[3:]       # 'lo nick'     (from index 3 to end)
-msg[3:8]      # 'lo ni'       (index 3 up to but not including 8)
+msg[3:]       # 'lo lin'     (from index 3 to end)
+msg[3:8]      # 'lo li'       (index 3 up to but not including 8)
 msg[3:8:2]    # 'l i'         (every 2nd character)
-msg[::-1]     # 'kcin olleh'  (reverse the string)
-msg[-5:-2]    # ' ni'         (negative slicing)
+msg[::-1]     # 'nil olleh'   (reverse the string)
+msg[-5:-2]    # 'o l'          (negative slicing)
 ```
 
 ---
@@ -59,8 +59,8 @@ msg[-5:-2]    # ' ni'         (negative slicing)
 ### 3. `len()` — Length
 
 ```python
-msg = 'hello nick'
-len(msg)   # 10
+msg = 'hello lin'
+len(msg)   # 9
 ```
 
 ---
@@ -68,9 +68,9 @@ len(msg)   # 10
 ### 4. `in` / `not in` — Membership Test
 
 ```python
-msg = 'my name is nick, nick handsome'
+msg = 'my name is lin, lin handsome'
 
-'nick' in msg        # True
+'lin' in msg        # True
 'jason' not in msg   # True
 not 'jason' in msg   # True   (same as above)
 ```
@@ -80,11 +80,11 @@ not 'jason' in msg   # True   (same as above)
 ### 5. `strip()` — Remove Characters from Both Ends
 
 ```python
-name = '&&&n ick'
-name.strip('&')     # 'n ick'  (removes & from both ends)
-name                # '&&&n ick'  (original unchanged — strings are immutable)
+name = '&&&lin'
+name.strip('&')     # 'lin'  (removes & from both ends)
+name                # '&&&lin'  (original unchanged — strings are immutable)
 
-'*-& nick+'.strip('*-& +')   # 'nick'
+'*-& lin+'.strip('*-& +')   # 'lin'
 ```
 
 > **Default:** `strip()` with no argument removes **whitespace** (spaces, tabs, newlines).
@@ -101,10 +101,10 @@ if pwd.strip() == '123':     # handles accidental spaces typed by user
 ### 6. `split()` — Split into List
 
 ```python
-info = 'nick:male:19'
+info = 'lin:male:19'
 
-info.split(':')      # ['nick', 'male', '19']
-info.split(':', 1)   # ['nick', 'male:19']  (split at most 1 time)
+info.split(':')      # ['lin', 'male', '19']
+info.split(':', 1)   # ['lin', 'male:19']  (split at most 1 time)
 ```
 
 ---
@@ -112,9 +112,9 @@ info.split(':', 1)   # ['nick', 'male:19']  (split at most 1 time)
 ### 7. Loop Over a String
 
 ```python
-for ch in 'hello nick':
+for ch in 'hello lin':
     print(ch)
-# h e l l o   n i c k  (one character per line)
+# h e l l o   l i n  (one character per line)
 ```
 
 ---
@@ -124,9 +124,9 @@ for ch in 'hello nick':
 ### 1. `lstrip()` / `rstrip()` — Remove from One Side Only
 
 ```python
-name = '&&nick&&'
-name.lstrip('&')   # 'nick&&'   (left side only)
-name.rstrip('&')   # '&&nick'   (right side only)
+name = '&&lin&&'
+name.lstrip('&')   # 'lin&&'   (left side only)
+name.rstrip('&')   # '&&lin'   (right side only)
 ```
 
 ---
@@ -134,9 +134,9 @@ name.rstrip('&')   # '&&nick'   (right side only)
 ### 2. `lower()` / `upper()` — Change Case
 
 ```python
-name = 'Nick Chen'
-name.lower()   # 'nick chen'
-name.upper()   # 'NICK CHEN'
+name = 'Lin Chen'
+name.lower()   # 'lin chen'
+name.upper()   # 'LIN CHEN'
 ```
 
 ---
@@ -144,8 +144,8 @@ name.upper()   # 'NICK CHEN'
 ### 3. `startswith()` / `endswith()`
 
 ```python
-name = 'Nick Chen'
-name.startswith('Nick')   # True
+name = 'Lin Chen'
+name.startswith('Lin')   # True
 name.endswith('chen')     # False  (case-sensitive!)
 ```
 
@@ -154,8 +154,8 @@ name.endswith('chen')     # False  (case-sensitive!)
 ### 4. `rsplit()` — Split from the Right
 
 ```python
-info = 'nick:male:19'
-info.rsplit(':', 1)   # ['nick:male', '19']  (splits from right, max 1 time)
+info = 'lin:male:19'
+info.rsplit(':', 1)   # ['lin:male', '19']  (splits from right, max 1 time)
 ```
 
 > Useful when you only want the **last** segment of a string.
@@ -165,8 +165,8 @@ info.rsplit(':', 1)   # ['nick:male', '19']  (splits from right, max 1 time)
 ### 5. `join()` — Join a List into a String
 
 ```python
-lis = ['nick', 'male', '19']
-':'.join(lis)   # 'nick:male:19'
+lis = ['lin', 'male', '19']
+':'.join(lis)   # 'lin:male:19'
 ```
 
 > **Note:** All items in the list must be strings. Numbers will raise a `TypeError`.
@@ -180,8 +180,8 @@ lis = ['nick', 'male', '19']
 ### 6. `replace()` — Replace Substring
 
 ```python
-name = 'nick shuai'
-name.replace('shuai', 'handsome')   # 'nick handsome'
+name = 'lin shuai'
+name.replace('shuai', 'handsome')   # 'lin handsome'
 ```
 
 > The original string is **not modified** — a new string is returned.
@@ -235,10 +235,10 @@ msg.count('tank')       # 2    (how many times it appears)
 ### 2. `center()` / `ljust()` / `rjust()` / `zfill()` — Padding
 
 ```python
-'info nick'.center(50, '*')   # ********************info nick*********************
-'info nick'.ljust(50, '*')    # info nick*****************************************
-'info nick'.rjust(50, '*')    # *****************************************info nick
-'info nick'.zfill(50)         # 00000000000000000000000000000000000000000info nick
+'info lin'.center(50, '*')   # *********************info lin*********************
+'info lin'.ljust(50, '*')    # info lin******************************************
+'info lin'.rjust(50, '*')    # ******************************************info lin
+'info lin'.zfill(50)         # 000000000000000000000000000000000000000000info lin
 ```
 
 ---
@@ -255,11 +255,11 @@ msg.count('tank')       # 2    (how many times it appears)
 ### 4. `capitalize()` / `swapcase()` / `title()`
 
 ```python
-name = 'nick handsome sWAPCASE'
+name = 'lin handsome sWAPCASE'
 
-name.capitalize()   # 'Nick handsome swapcase'  (first letter upper, rest lower)
-name.swapcase()     # 'NICK HANDSOME Swapcase'  (flip every letter's case)
-name.title()        # 'Nick Handsome Swapcase'  (capitalize first letter of each word)
+name.capitalize()   # 'Lin handsome swapcase'  (first letter upper, rest lower)
+name.swapcase()     # 'LIN HANDSOME Swapcase'  (flip every letter's case)
+name.title()        # 'Lin Handsome Swapcase'  (capitalize first letter of each word)
 ```
 
 ---
@@ -298,9 +298,9 @@ name.title()        # 'Nick Handsome Swapcase'  (capitalize first letter of each
 | Mutable | ❌ No — immutable |
 
 ```python
-name = 'nick'
+name = 'lin'
 id(name)               # e.g. 4377100160
-name = 'nick handsome'
+name = 'lin handsome'
 id(name)               # e.g. 4377841264  ← different object in memory
 ```
 
