@@ -1,1 +1,125 @@
+# 852. Peak Index in a Mountain Array
 
+## Problem
+
+A **mountain array** strictly increases to a peak element, then strictly decreases.
+Find and return the index of the peak element.
+
+```
+[0, 1, 0]        → 1   (peak is at index 1)
+[0, 2, 1, 0]     → 1
+[0, 10, 5, 2]    → 1
+[3, 4, 5, 1]     → 2
+```
+
+> The problem guarantees the array is always a valid mountain — no need to validate input.
+
+---
+
+## Approach 1 — Brute Force  O(n)
+
+Scan every element and check if it is larger than both its left and right neighbours.
+
+```python
+class Solution:
+    def peakIndexInMountainArray(self, arr: List[int]) -> int:
+        for i in range(1, len(arr) - 1):
+            if arr[i] > arr[i - 1] and arr[i] > arr[i + 1]:
+                return i
+```
+
+**Why `range(1, len(arr) - 1)`?**
+The peak can never be the first or last element (a mountain must rise and then fall),
+so we safely skip index `0` and index `len(arr) - 1`.
+
+| | Value |
+|---|---|
+| Time | O(n) |
+| Space | O(1) |
+
+---
+
+## Approach 2 — Binary Search  O(log n)
+
+We can do better by exploiting the mountain property:
+
+- The left slope is **strictly increasing** → `arr[mid] < arr[mid + 1]`
+- The right slope is **strictly decreasing** → `arr[mid] > arr[mid + 1]`
+
+This tells us which side of the peak we are on, so we can eliminate half the array each step.
+
+### Logic
+
+```
+if arr[mid] < arr[mid + 1]:
+    we are on the LEFT slope → peak is to the right → move left pointer up
+else:
+    we are on the RIGHT slope (or at the peak) → peak is here or to the left → move right pointer down
+```
+
+### Key Insight — Why `right = mid` and not `right = mid - 1`?
+
+When `arr[mid] > arr[mid + 1]`, we know the peak is at `mid` **or to the left of `mid`**.
+We cannot rule out `mid` itself, so we set `right = mid` (not `mid - 1`) to keep it in the search range.
+
+The loop exits when `left == right`, and that position is guaranteed to be the peak.
+
+```python
+class Solution:
+    def peakIndexInMountainArray(self, arr: List[int]) -> int:
+        left, right = 0, len(arr) - 1
+        while left < right:
+            mid = (left + right) // 2
+            if arr[mid] < arr[mid + 1]:
+                left = mid + 1    # on the left slope, peak is to the right
+            else:
+                right = mid       # on the right slope, peak is here or to the left
+        return left               # left == right == peak index
+```
+
+| | Value |
+|---|---|
+| Time | O(log n) |
+| Space | O(1) |
+
+---
+
+## Worked Example
+
+```
+arr = [0, 3, 5, 4, 1]
+          0  1  2  3  4
+
+left=0, right=4
+  mid = 2  →  arr[2]=5, arr[3]=4  →  5 > 4  →  right = 2
+
+left=0, right=2
+  mid = 1  →  arr[1]=3, arr[2]=5  →  3 < 5  →  left = 2
+
+left=2, right=2  →  loop ends
+return 2  ✅  (arr[2] = 5 is the peak)
+```
+
+---
+
+## Comparison
+
+| | Brute Force | Binary Search |
+|---|---|---|
+| Time | O(n) | O(log n) |
+| Space | O(1) | O(1) |
+| Idea | Check both neighbours | Compare mid vs mid+1 |
+| When to use | Simple / short arrays | Large arrays, optimised solution |
+
+---
+
+## Key Takeaways
+
+| Point | Detail |
+|---|---|
+| Brute force condition | `arr[i] > arr[i-1] and arr[i] > arr[i+1]` |
+| Binary search condition | Compare `arr[mid]` vs `arr[mid+1]` to determine which slope you're on |
+| Move left pointer | `left = mid + 1` when on the left slope (ascending) |
+| Move right pointer | `right = mid` when on the right slope (descending) — keep `mid` in range |
+| Loop exit | `left == right` — both pointers converge on the peak |
+| Why not `mid - 1`? | Because `mid` itself could be the peak — never discard it prematurely |
